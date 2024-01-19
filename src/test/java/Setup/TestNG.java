@@ -85,7 +85,7 @@ public class TestNG {
         objectProductPage = new ProductPage(driver);
         objectProductPage.clickProceedToBuy();
         objectSignupPage = new SignUpPage(driver);
-        try{Thread.sleep(4000);}catch(InterruptedException e){System.out.println(e);}
+        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
         String actualTitle = objectSignupPage.getTitle();
         String expectedTitle = "Amazon Sign In";
         Assert.assertEquals(actualTitle,expectedTitle);
