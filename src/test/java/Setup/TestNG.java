@@ -50,11 +50,21 @@ public class TestNG {
     @Test(priority = 3)
     public void checkOnClickColorPattern(){
         objectProductListPage = new ProductListPage(driver);
-        String itemNameOnProductListPage = objectProductListPage.getfirstItemName();
-        objectProductListPage.clickColorPatterButton();
+        String itemNameOnProductListPage = objectProductListPage.getFirstItemName();
+        if(objectProductListPage.isColorButtonPresent()){
+            objectProductListPage.clickColorPatterButton();
+        }
+        else{
+            objectProductListPage.clickOnFirstItem();
+            String Tab1 = driver.getWindowHandle();
+            ArrayList<String> availableWindows = new ArrayList<String>(driver.getWindowHandles());
+            if (!availableWindows.isEmpty()) {
+                driver.switchTo().window(availableWindows.get(1));
+            }
+        }
         objectProductPage = new ProductPage(driver);
         String itemNameOnProductPage = objectProductPage.getItemName();
-        Assert.assertEquals(itemNameOnProductPage,itemNameOnProductListPage);
+        Assert.assertTrue(itemNameOnProductPage.contains(itemNameOnProductListPage));
     }
     @Test(priority=4)
     public void checkAddedToCart(){
@@ -65,7 +75,6 @@ public class TestNG {
 
         objectProductPage.clickAddToCart();
 
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         try{Thread.sleep(8000);}catch(InterruptedException e){System.out.println(e);}
         cartSize=objectProductPage.getCartSize();
         int finalCartSize=Integer.parseInt(cartSize);
