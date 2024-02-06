@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ProductPage {
     WebDriver driver;
-    By cartItemCount = By.id("nav-cart-count");
+    public By cartItemCount = By.id("nav-cart-count");
     By addToCartButton = By.id("add-to-cart-button");
     By proceedToCheckout = By.cssSelector("input[value='Proceed to checkout']");
     By getProceedToCheckoutSlidingWindow = By.id("attach-accessory-proceed-to-checkout-text");

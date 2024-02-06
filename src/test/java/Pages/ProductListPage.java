@@ -8,8 +8,8 @@ public class ProductListPage {
     WebDriver driver;
 
     By firstItem = By.id("div[data-cel-widget='search_result_2']");
-    By firstItemName = By.xpath("//*[@id='search']/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/div/div/span/div/div/div/div[2]/div/div/div[1]/h2/a/span");
-    By colourPatterButtonOfFirstItem = By.xpath("//*[@id='search']/div[1]/div[1]/div/span[1]/div[1]/div[3]/div/div/div/div/span/div/div/div/div[2]/div/div/div[3]/div[1]/div/div[3]/div/div/a/u");
+    By firstItemName = By.xpath("(//*[@id='search']//h2//span)[1]");
+    By colourPatterButtonOfFirstItem = By.xpath("(//*[@id='search']//div[@class='puisg-col-inner']//div[@class='puisg-row']//u)[1]");
 
     public ProductListPage(WebDriver driver){
 

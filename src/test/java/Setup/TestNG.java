@@ -4,13 +4,18 @@ import Pages.HomePage;
 import Pages.ProductListPage;
 import Pages.ProductPage;
 import Pages.SignUpPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -74,10 +79,12 @@ public class TestNG {
         int initialCartSize=Integer.parseInt(cartSize);
 
         objectProductPage.clickAddToCart();
-
-        try{Thread.sleep(8000);}catch(InterruptedException e){System.out.println(e);}
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        String expectedStringValue= Integer.toString(initialCartSize+1);
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(objectProductPage.cartItemCount,expectedStringValue));
         cartSize=objectProductPage.getCartSize();
         int finalCartSize=Integer.parseInt(cartSize);
+
         Assert.assertEquals(initialCartSize+1,finalCartSize);
     }
     @Test(priority=5)
