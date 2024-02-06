@@ -42,8 +42,9 @@ public class TestNG {
         Assert.assertEquals(actualTitle,expectedTitle);
     }
     @Test(priority = 2)
-    public void checkPageOnSearch(){
+    public void checkPageOnSearch() {
         objectHomePage = new HomePage(driver);
+        objectHomePage.clickOnSearchBar();
         objectHomePage.enterSearchItem("boat headphone");
         objectHomePage.clickOnSearchButton();
         objectProductListPage = new ProductListPage(driver);

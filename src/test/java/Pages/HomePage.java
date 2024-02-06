@@ -13,6 +13,9 @@ public class HomePage {
     public String getTitle(){
         return driver.getTitle();
     }
+    public void clickOnSearchBar(){
+        driver.findElement(searchBar).click();
+    }
     public void enterSearchItem(String item){
         driver.findElement(searchBar).sendKeys(item);
     }
