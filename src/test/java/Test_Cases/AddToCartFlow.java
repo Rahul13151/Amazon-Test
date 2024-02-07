@@ -1,26 +1,18 @@
-package Setup;
+package Test_Cases;
 
-import Pages.HomePage;
-import Pages.ProductListPage;
-import Pages.ProductPage;
-import Pages.SignUpPage;
-import org.openqa.selenium.By;
+import Pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import java.io.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
-public class TestNG {
+public class AddToCartFlow {
     WebDriver driver;
 
     HomePage objectHomePage;
@@ -30,7 +22,7 @@ public class TestNG {
     @BeforeTest
     public void beforeTest(){
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
         driver.get("https://www.amazon.in/");
     }
@@ -62,12 +54,12 @@ public class TestNG {
         }
         else{
             objectProductListPage.clickOnFirstItem();
-            String Tab1 = driver.getWindowHandle();
             ArrayList<String> availableWindows = new ArrayList<String>(driver.getWindowHandles());
             if (!availableWindows.isEmpty()) {
                 driver.switchTo().window(availableWindows.get(1));
             }
         }
+
         objectProductPage = new ProductPage(driver);
         String itemNameOnProductPage = objectProductPage.getItemName();
         Assert.assertTrue(itemNameOnProductPage.contains(itemNameOnProductListPage));
@@ -93,7 +85,6 @@ public class TestNG {
         objectProductPage = new ProductPage(driver);
         objectProductPage.clickProceedToBuy();
         objectSignupPage = new SignUpPage(driver);
-        driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
         String actualTitle = objectSignupPage.getTitle();
         String expectedTitle = "Amazon Sign In";
         Assert.assertEquals(actualTitle,expectedTitle);
